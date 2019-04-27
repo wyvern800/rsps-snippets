@@ -1,5 +1,5 @@
 # achievements
-In this snippet, I show my achievements system that I created to learn better how to use enums and etc. This is missing the custom interface but
+In these snippet, I show my achievements system that I created to learn better how to use enums and etc. This is missing the custom interface but
 with this you guys should be able to understand how to do systems like this to your projects.
 
 # Credits
