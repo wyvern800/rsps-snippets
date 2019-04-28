@@ -163,7 +163,7 @@ public class Achievements {
                 new int[][]{{LARGE_LAMP,4}, {11515,1}}, 4, 15),
         CRAFT_300_ROYALPL8(13, 1000 ,HARD, "The Royal One", new String[][]{{"Craft some royal plate bodies"}}, new String[][]{{"4 Task points"}},
                 new int[][]{{LARGE_LAMP,4}, {11582,1}}, 4, 16),
-        CUT_550_MLOGS(14, 550 ,HARD, "Magicutter", new String[][]{{"Cut some magic trees at any spot to collect some magic logs"}}, new String[][]{{"4 Task points"}},
+        CUT_550_MLOGS(14, 550 ,HARD, "kkkkkkk", new String[][]{{"Cut some magic trees at any spot to collect some magic logs"}}, new String[][]{{"4 Task points"}},
                 new int[][]{{LARGE_LAMP,4}, {11514,1}}, 4, 17),
 
     /* Elite*/
