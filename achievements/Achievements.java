@@ -23,6 +23,41 @@ public class Achievements {
 
     public static final int TOTAL_TASKS = 60;
 
+    public enum Store {
+        /*easy*/
+        POOR_WOODCUTTER(0, EASY), BURIED_ALIVE(1, EASY),IMPETUOUS(2, EASY), ALCHIMICUS(3, EASY), FLETCHUP_ING(4, EASY), THIEF_STEALING_THIEF(5, EASY),
+        HERBALISM_FOR_LOVE(6, EASY), OPAL_PAL(7, EASY), PREPARING_FOR_ATTACK(8, EASY), BEEFY_ONE(9, EASY), DIRTY_WORK(10, EASY), PROTECTIVE_BEHAVIOR(11, EASY),
+        WARMING_UP(12, EASY), POWERTATOES(13, EASY), WILDERNESS_CHESTER(14, EASY),
+        /*medium*/
+        DRAGONES_LIBERTATEM(0, MEDIUM), MASTER_ALCHIMICUS(1, MEDIUM), NETTLE_CLEANSER(2, MEDIUM), GOLD_LOVER(3, MEDIUM), LOBBIE_FISHER(4, MEDIUM), DA_RUNE_THIEF(5, MEDIUM),
+        THE_CRAFTER(6, MEDIUM), THE_TREASURE_HUNTER(7, MEDIUM), TIRELESS_RUNNER(8, MEDIUM), NO_FLAX_ZONE(9, MEDIUM), THE_WILLPOWER(10, MEDIUM), IRON_PRODIGY(11, MEDIUM),
+        DONT_BE_AFRAID_OF_FROSTS(12, MEDIUM), WILDERRUNER(13, MEDIUM), MAPLE_STORY(14, MEDIUM),
+        /*hard*/
+        FOURGIVENESS(0, HARD), IN_SEARCH_OF_BROTHERS(1, HARD), THE_FURNISHED(2, HARD), VOIDLY_PRESENCE(3, HARD), SQIRKING(4, HARD), THE_INFERNAL(5, HARD),
+        MAGICHOLIC(6, HARD), THE_TERMINED(7, HARD), SHARKNATOR(8, HARD), ASH_ME_A_QUESTION(9, HARD), JUNIOR_MINER(10, HARD), HARD_BONE_TO_GNAW(11, HARD),
+        HOLY_BREWING(12, HARD), THE_ROYAL_ONE(13, HARD), MAGICUTTER(14, HARD),
+        /*elite*/
+        MAGIC_BURNER(0, ELITE), HERB_MASTER(1, ELITE), DRAGONCUTTER(2, ELITE), FROM_THE_DEEP(3, ELITE), MASTER_MINER(4, ELITE), UNDERGROUNDER(5, ELITE), REVENANTIOUS(6, ELITE),
+        ADVANCED_STRINGER(7, ELITE), OUT_OF_CONTROL(8, ELITE), RUNELMS_AT_ITS_FINEST(9, ELITE), THE_DRAGONBORN(10, ELITE), THE_MAHOGANT(11, ELITE), CHINCHOMPER(12, ELITE),
+        THE_LEPORTER(13, ELITE), FRUIT_LOOPS(14, ELITE)
+        ;
+
+        private int id;
+        private int difficulty;
+
+        Store(int taskId, int difficultyId) {
+            this.id = taskId;
+            this.difficulty = difficultyId;
+        }
+
+        public int getDifficulty() {
+            return difficulty;
+        }
+        public int getId() {
+            return id;
+        }
+    }
+
     public enum Achievement {
     /* Easy */
     CUT_500_LOGS(0, 500 ,EASY, "Poor woodcutter", new String[][]{{"Cut some trees at any spot to collect some logs"}}, new String[][]{{"2 Task points"},},
@@ -215,22 +250,23 @@ public class Achievements {
                                 Achievements.OFFSET_HARD : Achievements.OFFSET_ELITE;
     }
 
-    public static void checkAchievementStatus(Player player, int difficulty, int taskId, int quant) {
+    public static void checkAchievementStatus(Player player, Achievements.Store selectedAchievement, int quant) {
         for (Achievements.Achievement achievement : Achievements.Achievement.values()) {
-            if (achievement.getDifficulty() == difficulty) {
-                if (achievement.getAchievementId() == taskId) {
-                    if (player.getAchievements(Achievements.getAchievementOffset(achievement) + taskId) < 1) { //first value
+            if (achievement.getDifficulty() == selectedAchievement.getDifficulty()) {
+                if (achievement.getAchievementId() == selectedAchievement.getId()) {
+                    if (player.getAchievements(Achievements.getAchievementOffset(achievement) + selectedAchievement.getId()) < 1) { //first value
                         player.sm("<img="+Settings.ACHIEVEMENTS_ICON+"> Your achievement: " + achievement.getAchievementName() + " was updated!");
                     } else {
-                        if (player.getAchievements(Achievements.getAchievementOffset(achievement) + taskId) < achievement.getAchievementQuantity())
-                        player.getPackets().sendGameMessage("<col=4150be>"+achievement.getAchievementName() + ": ("+player.getAchievements(Achievements.getAchievementOffset(achievement) + taskId)+"/"+achievement.getAchievementQuantity()+") actions left!", true);
+                        if (player.getAchievements(Achievements.getAchievementOffset(achievement) + selectedAchievement.getId()) < achievement.getAchievementQuantity())
+                        player.getPackets().sendGameMessage("<col=4150be>[Task Update] "+achievement.getAchievementName() + ": ("+player.getAchievements(Achievements.getAchievementOffset(achievement) + selectedAchievement.getId())+" / "+achievement.getAchievementQuantity()+").", true);
                     }
-                    if (player.getAchievements(Achievements.getAchievementOffset(achievement) + taskId) == (achievement.getAchievementQuantity() / 2)-1) { //half number
+                    if (player.getAchievements(Achievements.getAchievementOffset(achievement) + selectedAchievement.getId()) == (achievement.getAchievementQuantity() / 2)-1) { //half number
                         player.sm("<img="+Settings.ACHIEVEMENTS_ICON+"> <col=f00000>Your achievement: " + achievement.getAchievementName() + " was updated, you are now on 50% of completion!</col>");
                     }
-                    if (player.getAchievements(Achievements.getAchievementOffset(achievement) + taskId) == (achievement.getAchievementQuantity()) -1) {//last value
+                    if (player.getAchievements(Achievements.getAchievementOffset(achievement) + selectedAchievement.getId()) == (achievement.getAchievementQuantity()) -1) {//last value
                         Description.sendCollectRewards(player, false);
                         player.setTasksdone(player.getTasksdone() + 1);
+                        player.setAchievementPoints(player.getAchievementPoints()+ achievement.getPointsReward());
                         player.sm("<col=f00000>Congratulations, you just completed the achievement: "+achievement.getAchievementName()+ "!</col>");
                         World.sendWorldMessage(
                                 player.getColorByDisplayMode(9) + "<img=" + Settings.ICON + "> News: " + player.getDisplayName()
@@ -241,7 +277,8 @@ public class Achievements {
                                 : achievement.getDifficulty() == Achievements.HARD ? "Hard Achievements" : "Elite Achievements"), "\uD83D\uDCAC Has just completed the achievement " +  MediumTasksChecks.TasksName.CLEAN_250_NETTLES.getName() + " in " + player.getGameModeName(false).toLowerCase() + " mode \uD83E\uDD70! - @everyone").logOrange();
 
                     }
-                    player.setAchievements(Achievements.getAchievementOffset(achievement) + taskId, quant);
+                    player.setAchievements(Achievements.getAchievementOffset(achievement) + selectedAchievement.getId(), quant);
+                    Tab.open(player);
                 }
             }
         }
