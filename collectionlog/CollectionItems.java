@@ -1,4 +1,4 @@
-package com.rs.game.player.content.collectionlog;
+package com.rs.game.player.content.interfaces.collectionlog;
 
 public class CollectionItems {
 
@@ -6,7 +6,9 @@ public class CollectionItems {
         /*BOSSES*/ GWD, BANDOS, ARMADYL, ZAMORAK, SARADOMIN, ZAROS, TORMENTED, GIANT_MOLE, DKS, CORPOREAL, KQ, QBD, KBD, CHAOS_ELEMENTAL, BLINK, SUNFREET,
         /*CLUES*/CLUE_EASY, CLUE_MEDIUM, CLUE_HARD, CLUE_ELITE, ALL_CLUES,
         /*MINIGAMES*/ PEST_CONTROL, FIGHT_CAVES, FIGHT_KILN, DOMINION_TOWER, BARROWS,
-        /*OTHERS*/BOSS_PETS, SUMMONING_CHARMS, SLAYER_DROPS, SKILL_PETS
+        /*OTHERS*/BOSS_PETS, SUMMONING_CHARMS, SLAYER_DROPS, SKILL_PETS,
+        /*RAIDS*/XERIC,
+        NONE,
     }
 
     public enum Collection {
@@ -305,6 +307,9 @@ public class CollectionItems {
         BARROWS_ITE54M09(CollectionType.BARROWS,4753),
         BARROWS_ITE455M03(CollectionType.BARROWS,4755),
         BARROWS_ITEM4554603(CollectionType.BARROWS,4757),
+
+        XERIC_ITEM4554603(CollectionType.XERIC,4151),
+        XERIC_ITEMghjg03(CollectionType.XERIC,14484),
 
         ;
 
