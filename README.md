@@ -9,3 +9,4 @@ Here I'l put some of my own 718 RSPS snippets for you guys
 * [Potion Timers](https://github.com/wyvern800/RSPS-Snippets/tree/master/potiontimers) - Snippets to show you how I did my own Matrix potion timers system as good as I could!
 * [Starter System](https://github.com/wyvern800/RSPS-Snippets/tree/master/starterinterface) - Snippets to show you how I did my own Matrix tarting system as good as I could!
 * [Teleports System](https://github.com/wyvern800/RSPS-Snippets/tree/master/teleportsinterface) - Snippets to show you how I did my own Matrix teleports system as good as I could!
+* [Titles Management System](https://github.com/wyvern800/RSPS-Snippets/tree/master/titles) - Snippets to show you how I did my own Matrix title management system as good as I could!
