@@ -9,3 +9,4 @@ Here I'l put some of my own 718 RSPS snippets for you guys
 * [Potion Timers](https://github.com/wyvern800/RSPS-Snippets/tree/master/potiontimers) - Snippets to show you how I did my own Matrix potion timers system as good as I could!
 * [Starter System](https://github.com/wyvern800/RSPS-Snippets/tree/master/starterinterface) - Snippets to show you how I did my own Matrix tarting system as good as I could!
 * [Teleports System](https://github.com/wyvern800/RSPS-Snippets/tree/master/teleportsinterface) - Snippets to show you how I did my own Matrix teleports system as good as I could!
+* [Custom RAIDS System](https://github.com/wyvern800/RSPS-Snippets/tree/master/raids) - My complete RAIDS system for a 718 server (preferable matrix) you'l need to correct the packets part to get it working, won't help you though (can sell the full system if you want)!
