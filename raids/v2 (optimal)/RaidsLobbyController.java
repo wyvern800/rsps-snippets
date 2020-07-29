@@ -1,4 +1,4 @@
-package com.rs.game.minigames.raids;
+package com.rs.game.player.content.raids;
 
 import com.rs.game.Entity;
 import com.rs.game.WorldObject;
@@ -10,7 +10,7 @@ import com.rs.game.player.content.consumables.Foods;
 import com.rs.game.player.content.consumables.Pots;
 import com.rs.game.player.controllers.Controller;
 
-public class RaidLobby extends Controller {
+public class RaidsLobbyController extends Controller {
     @Override
     public void start() {
         player.getPackets().sendBlackOut(2);
@@ -20,11 +20,8 @@ public class RaidLobby extends Controller {
 
     @Override
     public void process() {
-        if (player.getRaidGroup() != null && !player.getRaidGroup().getGroupMembers().isEmpty()) {
-            player.getRaidManager().sendInterface();
-        } else {
-            player.getRaidManager().closeInterface();
-        }
+        player.getRaidsManager().sendGroupMembersInterface();
+        player.getRaidsManager().updateGroupListInterface();
     }
 
     @Override
@@ -34,15 +31,18 @@ public class RaidLobby extends Controller {
 
     @Override
     public void magicTeleported(int type) {
-        if (player.getRaidGroup() != null && !player.getRaidGroup().getGroupMembers().isEmpty()) {
-            player.getRaidGroup().leave(player, RaidGroup.LeaveType.TELEPORT);
+        boolean hasGroup = player.getRaidsManager().hasRaidGroup();
+
+        if (hasGroup) {
+            player.getRaidsManager().leave(player, RaidsManager.LeaveType.TELEPORT);
         }
     }
 
     @Override
     public boolean logout() {
-        if (player.getRaidGroup() != null && !player.getRaidGroup().getGroupMembers().isEmpty()) {
-            player.getRaidGroup().leave(player, RaidGroup.LeaveType.LOGOUT);
+        boolean hasGroup = player.getRaidsManager().hasRaidGroup();
+        if (hasGroup) {
+            player.getRaidsManager().leave(player, RaidsManager.LeaveType.LOGOUT);
         }
         return true;
     }

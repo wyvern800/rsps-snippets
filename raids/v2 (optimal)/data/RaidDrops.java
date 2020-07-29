@@ -1,4 +1,4 @@
-package com.rs.game.minigames.raids.data;
+package com.rs.game.player.content.raids.data;
 
 import com.rs.game.item.Item;
 
