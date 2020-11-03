@@ -1,0 +1,1 @@
+These are just for showoff, so you guys can check my improvement with java, some parts may be missing
